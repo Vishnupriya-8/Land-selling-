@@ -1,0 +1,17 @@
+<!-- plot_confirm_delete.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Plot</title>
+</head>
+<body>
+    <h2>Are you sure you want to delete "{{ object }}"?</h2>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes,delete</button>
+        <a href="{% url 'my_plots' %}">Cancel</a>
+    </form>
+</body>
+</html>
+

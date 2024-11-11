@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Land Selling</title>
+
+        <!-- CSS FILES -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+
+        <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/css/bootstrap-icons.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="/static/css/slick.css"/>
+
+        <link href="/static/css/tooplate-little-fashion.css" rel="stylesheet">
+<!--
+
+Tooplate 2127 Little Fashion
+
+https://www.tooplate.com/view/2127-little-fashion
+
+-->
+    </head>
+    
+    <body>
+
+        <section class="preloader">
+            <div class="spinner">
+                <span class="sk-inner-circle"></span>
+            </div>
+        </section>
+    
+        <main>
+
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <a class="navbar-brand" href="{% url 'index' %}">
+                        <strong><span>Land</span> selling</strong>
+                    </a>
+
+                    <div class="d-lg-none">
+                        <a href="{%url 'login' %}" class="bi-person custom-icon me-3"></a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item">
+                                <a class="nav-link " href="{% url 'view' %}">Home</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'add' %}">Add Plot</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{% url 'my_plots' %}">My Plots</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                            </li>
+                        </ul>
+
+                        
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container">
+                <h1 class="text-center my-4">My Plots</h1>
+        
+                {% if lands %}
+                <div class="row">
+                    {% for land in lands %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card shadow-sm">
+                            <img src="{{ land.image.url }}" style="height: 200px;" class="card-img-top" alt="{{ land.title }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ land.title }}</h5>
+                                <p class="card-text"><strong>Sqrft: {{ land.square_footage }}</strong></p>
+                                <p class="card-text"><strong>Description: {{ land.description }}</strong></p>
+                                <p class="card-text"><strong>Price per day: ${{ land.price }}</strong></p>
+                                <!-- Edit Button -->
+                                <a href="{% url 'edit' land.id %}" class="btn btn-info">Edit</a>
+        
+                                <!-- Delete Form -->
+                                <form action="" method="post" style="display:inline;">
+                                    {% csrf_token %}
+                                    <a href="{% url 'delete' land.id %}">
+                                    <button type="submit" class="btn btn-warning ">Delete</button></a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+        
+                {% else %}
+                <!-- Message when no lands are available -->
+                <p class='no-lands-message'>You have not added any lands yet.</p>
+                {% endif %}
+                
+            </div>
+
+            
+        </main>
+
+        <footer class="site-footer" >
+            <div class="container">
+                <div class="row"  >
+
+                    <div class="col-lg-3 col-10 me-auto mb-4">
+                        <h4 class="text-white mb-3"><a href="{% url 'index' %}">Land</a> Selling</h4>
+                        <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2024 <strong>Land Selling</strong></p>
+                        <br>
+                    </div>
+
+                    
+
+                    <div class="col-lg-3 col-4">
+                        <h5 class="text-white mb-3">Social</h5>
+
+                        <ul class="social-icon">
+
+                            <li><a href="#" class="social-icon-link bi-youtube"></a></li>
+
+                            <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
+
+                            <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+
+                            <li><a href="#" class="social-icon-link bi-skype"></a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+
+        <!-- JAVASCRIPT FILES -->
+        <script src="/static/js/jquery.min.js"></script>
+        <script src="/static/js/bootstrap.bundle.min.js"></script>
+        <script src="/static/js/Headroom.js"></script>
+        <script src="/static/js/jQuery.headroom.js"></script>
+        <script src="/static/js/slick.min.js"></script>
+        <script src="/static/js/custom.js"></script>
+
+    </body>
+</html>
